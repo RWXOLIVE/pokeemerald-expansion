@@ -4681,13 +4681,15 @@ static s32 AI_SetupFirstTurn(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
 {
     u8 i;
     if (IS_TARGETING_PARTNER(battlerAtk, battlerDef)
-      || gBattleResults.battleTurnCounter != 0)
+    || gBattleResults.battleTurnCounter != 0)
+    {
         return score;
+    }
 
     if (AI_THINKING_STRUCT->aiFlags[battlerAtk] & AI_FLAG_SMART_SWITCHING
-      && AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_SLOWER
-      && CanTargetFaintAi(battlerDef, battlerAtk)
-      && GetMovePriority(battlerAtk, move) == 0)
+    && AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_SLOWER
+    && CanTargetFaintAi(battlerDef, battlerAtk)
+    && GetMovePriority(battlerAtk, move) == 0)
     {
         RETURN_SCORE_MINUS(20);    // No point in setting up if you will faint. Should just switch if possible..
     }
@@ -4695,110 +4697,110 @@ static s32 AI_SetupFirstTurn(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
     // check effects to prioritize first turn
     switch (gMovesInfo[move].effect)
     {
-    case EFFECT_ATTACK_UP:
-    case EFFECT_ATTACK_UP_USER_ALLY:
-    case EFFECT_DEFENSE_UP:
-    case EFFECT_SPEED_UP:
-    case EFFECT_SPECIAL_ATTACK_UP:
-    case EFFECT_SPECIAL_DEFENSE_UP:
-    case EFFECT_ACCURACY_UP:
-    case EFFECT_EVASION_UP:
-    case EFFECT_ATTACK_DOWN:
-    case EFFECT_DEFENSE_DOWN:
-    case EFFECT_SPEED_DOWN:
-    case EFFECT_SPECIAL_ATTACK_DOWN:
-    case EFFECT_SPECIAL_DEFENSE_DOWN:
-    case EFFECT_ACCURACY_DOWN:
-    case EFFECT_EVASION_DOWN:
-    case EFFECT_CONVERSION:
-    case EFFECT_LIGHT_SCREEN:
-    case EFFECT_FOCUS_ENERGY:
-    case EFFECT_CONFUSE:
-    case EFFECT_ATTACK_UP_2:
-    case EFFECT_DEFENSE_UP_2:
-    case EFFECT_DEFENSE_UP_3:
-    case EFFECT_SPEED_UP_2:
-    case EFFECT_SPECIAL_ATTACK_UP_2:
-    case EFFECT_SPECIAL_ATTACK_UP_3:
-    case EFFECT_SPECIAL_DEFENSE_UP_2:
-    case EFFECT_ACCURACY_UP_2:
-    case EFFECT_EVASION_UP_2:
-    case EFFECT_ATTACK_DOWN_2:
-    case EFFECT_DEFENSE_DOWN_2:
-    case EFFECT_SPEED_DOWN_2:
-    case EFFECT_SPECIAL_ATTACK_DOWN_2:
-    case EFFECT_SPECIAL_DEFENSE_DOWN_2:
-    case EFFECT_ACCURACY_DOWN_2:
-    case EFFECT_EVASION_DOWN_2:
-    case EFFECT_REFLECT:
-    case EFFECT_POISON:
-    case EFFECT_PARALYZE:
-    case EFFECT_SUBSTITUTE:
-    case EFFECT_LEECH_SEED:
-    case EFFECT_MINIMIZE:
-    case EFFECT_CURSE:
-    case EFFECT_SWAGGER:
-    case EFFECT_CAMOUFLAGE:
-    case EFFECT_YAWN:
-    case EFFECT_DEFENSE_CURL:
-    case EFFECT_TORMENT:
-    case EFFECT_FLATTER:
-    case EFFECT_WILL_O_WISP:
-    case EFFECT_INGRAIN:
-    case EFFECT_IMPRISON:
-    case EFFECT_TICKLE:
-    case EFFECT_COSMIC_POWER:
-    case EFFECT_BULK_UP:
-    case EFFECT_CALM_MIND:
-    case EFFECT_ACUPRESSURE:
-    case EFFECT_AUTOTOMIZE:
-    case EFFECT_SHIFT_GEAR:
-    case EFFECT_SHELL_SMASH:
-    case EFFECT_GROWTH:
-    case EFFECT_QUIVER_DANCE:
-    case EFFECT_ATTACK_SPATK_UP:
-    case EFFECT_ATTACK_ACCURACY_UP:
-    case EFFECT_PSYCHIC_TERRAIN:
-    case EFFECT_GRASSY_TERRAIN:
-    case EFFECT_ELECTRIC_TERRAIN:
-    case EFFECT_MISTY_TERRAIN:
-    case EFFECT_STEALTH_ROCK:
-    case EFFECT_TOXIC_SPIKES:
-    case EFFECT_TRICK_ROOM:
-    case EFFECT_WONDER_ROOM:
-    case EFFECT_MAGIC_ROOM:
-    case EFFECT_TAILWIND:
-    case EFFECT_DRAGON_DANCE:
-    case EFFECT_TIDY_UP:
-    case EFFECT_STICKY_WEB:
-    case EFFECT_RAIN_DANCE:
-    case EFFECT_SUNNY_DAY:
-    case EFFECT_SANDSTORM:
-    case EFFECT_HAIL:
-    case EFFECT_SNOWSCAPE:
-    case EFFECT_GEOMANCY:
-    case EFFECT_VICTORY_DANCE:
-        ADJUST_SCORE(DECENT_EFFECT);
-        break;
-    case EFFECT_HIT:
-    {
-        // TEMPORARY - should applied to all moves regardless of EFFECT
-        // Consider move effects
-        for (i = 0; i < gMovesInfo[move].numAdditionalEffects; i++)
+        case EFFECT_ATTACK_UP:
+        case EFFECT_ATTACK_UP_USER_ALLY:
+        case EFFECT_DEFENSE_UP:
+        case EFFECT_SPEED_UP:
+        case EFFECT_SPECIAL_ATTACK_UP:
+        case EFFECT_SPECIAL_DEFENSE_UP:
+        case EFFECT_ACCURACY_UP:
+        case EFFECT_EVASION_UP:
+        case EFFECT_ATTACK_DOWN:
+        case EFFECT_DEFENSE_DOWN:
+        case EFFECT_SPEED_DOWN:
+        case EFFECT_SPECIAL_ATTACK_DOWN:
+        case EFFECT_SPECIAL_DEFENSE_DOWN:
+        case EFFECT_ACCURACY_DOWN:
+        case EFFECT_EVASION_DOWN:
+        case EFFECT_CONVERSION:
+        case EFFECT_LIGHT_SCREEN:
+        case EFFECT_FOCUS_ENERGY:
+        case EFFECT_CONFUSE:
+        case EFFECT_ATTACK_UP_2:
+        case EFFECT_DEFENSE_UP_2:
+        case EFFECT_DEFENSE_UP_3:
+        case EFFECT_SPEED_UP_2:
+        case EFFECT_SPECIAL_ATTACK_UP_2:
+        case EFFECT_SPECIAL_ATTACK_UP_3:
+        case EFFECT_SPECIAL_DEFENSE_UP_2:
+        case EFFECT_ACCURACY_UP_2:
+        case EFFECT_EVASION_UP_2:
+        case EFFECT_ATTACK_DOWN_2:
+        case EFFECT_DEFENSE_DOWN_2:
+        case EFFECT_SPEED_DOWN_2:
+        case EFFECT_SPECIAL_ATTACK_DOWN_2:
+        case EFFECT_SPECIAL_DEFENSE_DOWN_2:
+        case EFFECT_ACCURACY_DOWN_2:
+        case EFFECT_EVASION_DOWN_2:
+        case EFFECT_REFLECT:
+        case EFFECT_POISON:
+        case EFFECT_PARALYZE:
+        case EFFECT_SUBSTITUTE:
+        case EFFECT_LEECH_SEED:
+        case EFFECT_MINIMIZE:
+        case EFFECT_CURSE:
+        case EFFECT_SWAGGER:
+        case EFFECT_CAMOUFLAGE:
+        case EFFECT_YAWN:
+        case EFFECT_DEFENSE_CURL:
+        case EFFECT_TORMENT:
+        case EFFECT_FLATTER:
+        case EFFECT_WILL_O_WISP:
+        case EFFECT_INGRAIN:
+        case EFFECT_IMPRISON:
+        case EFFECT_TICKLE:
+        case EFFECT_COSMIC_POWER:
+        case EFFECT_BULK_UP:
+        case EFFECT_CALM_MIND:
+        case EFFECT_ACUPRESSURE:
+        case EFFECT_AUTOTOMIZE:
+        case EFFECT_SHIFT_GEAR:
+        case EFFECT_SHELL_SMASH:
+        case EFFECT_GROWTH:
+        case EFFECT_QUIVER_DANCE:
+        case EFFECT_ATTACK_SPATK_UP:
+        case EFFECT_ATTACK_ACCURACY_UP:
+        case EFFECT_PSYCHIC_TERRAIN:
+        case EFFECT_GRASSY_TERRAIN:
+        case EFFECT_ELECTRIC_TERRAIN:
+        case EFFECT_MISTY_TERRAIN:
+        case EFFECT_STEALTH_ROCK:
+        case EFFECT_TOXIC_SPIKES:
+        case EFFECT_TRICK_ROOM:
+        case EFFECT_WONDER_ROOM:
+        case EFFECT_MAGIC_ROOM:
+        case EFFECT_TAILWIND:
+        case EFFECT_DRAGON_DANCE:
+        case EFFECT_TIDY_UP:
+        case EFFECT_STICKY_WEB:
+        case EFFECT_RAIN_DANCE:
+        case EFFECT_SUNNY_DAY:
+        case EFFECT_SANDSTORM:
+        case EFFECT_HAIL:
+        case EFFECT_SNOWSCAPE:
+        case EFFECT_GEOMANCY:
+        case EFFECT_VICTORY_DANCE:
+            ADJUST_SCORE(DECENT_EFFECT);
+            break;
+        case EFFECT_HIT:
         {
-            switch (gMovesInfo[move].additionalEffects[i].moveEffect)
+            // TEMPORARY - should applied to all moves regardless of EFFECT
+            // Consider move effects
+            for (i = 0; i < gMovesInfo[move].numAdditionalEffects; i++)
             {
-                case MOVE_EFFECT_STEALTH_ROCK:
-                case MOVE_EFFECT_SPIKES:
-                    ADJUST_SCORE(DECENT_EFFECT);
-                    break;
-                default:
-                    break;
+                switch (gMovesInfo[move].additionalEffects[i].moveEffect)
+                {
+                    case MOVE_EFFECT_STEALTH_ROCK:
+                    case MOVE_EFFECT_SPIKES:
+                        ADJUST_SCORE(DECENT_EFFECT);
+                        break;
+                    default:
+                        break;
+                }
             }
         }
-    }
-    default:
-        break;
+        default:
+            break;
     }
 
     return score;
@@ -4878,10 +4880,10 @@ static s32 AI_PreferStrongestMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 
 static s32 AI_PreferBatonPass(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
 {
     if (IS_TARGETING_PARTNER(battlerAtk, battlerDef)
-      || CountUsablePartyMons(battlerAtk) == 0
-      || gMovesInfo[move].power != 0
-      || !HasMoveEffect(battlerAtk, EFFECT_BATON_PASS)
-      || IsBattlerTrapped(battlerAtk, TRUE))
+    || CountUsablePartyMons(battlerAtk) == 0
+    || gMovesInfo[move].power != 0
+    || !HasMoveEffect(battlerAtk, EFFECT_BATON_PASS)
+    || IsBattlerTrapped(battlerAtk, TRUE))
         return score;
 
     if (IsStatRaisingEffect(gMovesInfo[move].effect))
@@ -4897,29 +4899,29 @@ static s32 AI_PreferBatonPass(u32 battlerAtk, u32 battlerDef, u32 move, s32 scor
     // other specific checks
     switch (gMovesInfo[move].effect)
     {
-    case EFFECT_INGRAIN:
-        if (!(gStatuses3[battlerAtk] & STATUS3_ROOTED))
-            ADJUST_SCORE(DECENT_EFFECT);
-        break;
-    case EFFECT_AQUA_RING:
-        if (!(gStatuses3[battlerAtk] & STATUS3_AQUA_RING))
-            ADJUST_SCORE(DECENT_EFFECT);
-        break;
-    case EFFECT_PROTECT:
-        if (gLastMoves[battlerAtk] == MOVE_PROTECT || gLastMoves[battlerAtk] == MOVE_DETECT)
-            ADJUST_SCORE(-2);
-        else
-            ADJUST_SCORE(DECENT_EFFECT);
-        break;
-    case EFFECT_BATON_PASS:
-        // TODO: Increase Score based on current stats.
-        if (gStatuses3[battlerAtk] & (STATUS3_ROOTED | STATUS3_AQUA_RING))
-            ADJUST_SCORE(DECENT_EFFECT);
-        if (gStatuses3[battlerAtk] & STATUS3_LEECHSEED)
-            ADJUST_SCORE(-3);
-        break;
-    default:
-        break;
+        case EFFECT_INGRAIN:
+            if (!(gStatuses3[battlerAtk] & STATUS3_ROOTED))
+                ADJUST_SCORE(DECENT_EFFECT);
+            break;
+        case EFFECT_AQUA_RING:
+            if (!(gStatuses3[battlerAtk] & STATUS3_AQUA_RING))
+                ADJUST_SCORE(DECENT_EFFECT);
+            break;
+        case EFFECT_PROTECT:
+            if (gLastMoves[battlerAtk] == MOVE_PROTECT || gLastMoves[battlerAtk] == MOVE_DETECT)
+                ADJUST_SCORE(-2);
+            else
+                ADJUST_SCORE(DECENT_EFFECT);
+            break;
+        case EFFECT_BATON_PASS:
+            // TODO: Increase Score based on current stats.
+            if (gStatuses3[battlerAtk] & (STATUS3_ROOTED | STATUS3_AQUA_RING))
+                ADJUST_SCORE(DECENT_EFFECT);
+            if (gStatuses3[battlerAtk] & STATUS3_LEECHSEED)
+                ADJUST_SCORE(-3);
+            break;
+        default:
+            break;
     }
 
     return score;
@@ -4936,15 +4938,16 @@ static s32 AI_HPAware(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
     if (IS_TARGETING_PARTNER(battlerAtk, battlerDef))
     {
         if ((effect == EFFECT_HEAL_PULSE || effect == EFFECT_HIT_ENEMY_HEAL_ALLY)
-         || (moveType == TYPE_ELECTRIC && AI_DATA->abilities[BATTLE_PARTNER(battlerAtk)] == ABILITY_VOLT_ABSORB)
-         || (moveType == TYPE_GROUND && AI_DATA->abilities[BATTLE_PARTNER(battlerAtk)] == ABILITY_EARTH_EATER)
-         || (moveType == TYPE_WATER && (AI_DATA->abilities[BATTLE_PARTNER(battlerAtk)] == ABILITY_DRY_SKIN || AI_DATA->abilities[BATTLE_PARTNER(battlerAtk)] == ABILITY_WATER_ABSORB)))
+        || (moveType == TYPE_ELECTRIC && AI_DATA->abilities[BATTLE_PARTNER(battlerAtk)] == ABILITY_VOLT_ABSORB)
+        || (moveType == TYPE_GROUND && AI_DATA->abilities[BATTLE_PARTNER(battlerAtk)] == ABILITY_EARTH_EATER)
+        || (moveType == TYPE_WATER && (AI_DATA->abilities[BATTLE_PARTNER(battlerAtk)] == ABILITY_DRY_SKIN
+        || AI_DATA->abilities[BATTLE_PARTNER(battlerAtk)] == ABILITY_WATER_ABSORB)))
         {
             if (gStatuses3[battlerDef] & STATUS3_HEAL_BLOCK)
                 return 0;
 
             if (CanTargetFaintAi(FOE(battlerAtk), BATTLE_PARTNER(battlerAtk))
-              || (CanTargetFaintAi(BATTLE_PARTNER(FOE(battlerAtk)), BATTLE_PARTNER(battlerAtk))))
+            || (CanTargetFaintAi(BATTLE_PARTNER(FOE(battlerAtk)), BATTLE_PARTNER(battlerAtk))))
                 ADJUST_SCORE(-1);
 
             if (AI_DATA->hpPercents[battlerDef] <= 50)
@@ -4954,32 +4957,32 @@ static s32 AI_HPAware(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
     else
     {
         // Consider AI HP
-        if (AI_DATA->hpPercents[battlerAtk] > 70)
+        if (AI_DATA->hpPercents[battlerAtk] > 69)
         {
             // high hp
             switch (effect)
             {
-            case EFFECT_EXPLOSION:
-            case EFFECT_RESTORE_HP:
-            case EFFECT_REST:
-            case EFFECT_DESTINY_BOND:
-            case EFFECT_FLAIL:
-            case EFFECT_ENDURE:
-            case EFFECT_MORNING_SUN:
-            case EFFECT_SYNTHESIS:
-            case EFFECT_MOONLIGHT:
-            case EFFECT_SHORE_UP:
-            case EFFECT_SOFTBOILED:
-            case EFFECT_ROOST:
-            case EFFECT_MEMENTO:
-            case EFFECT_GRUDGE:
-                ADJUST_SCORE(-2);
-                break;
-            default:
-                break;
+                case EFFECT_EXPLOSION:
+                case EFFECT_RESTORE_HP:
+                case EFFECT_REST:
+                case EFFECT_DESTINY_BOND:
+                case EFFECT_FLAIL:
+                case EFFECT_ENDURE:
+                case EFFECT_MORNING_SUN:
+                case EFFECT_SYNTHESIS:
+                case EFFECT_MOONLIGHT:
+                case EFFECT_SHORE_UP:
+                case EFFECT_SOFTBOILED:
+                case EFFECT_ROOST:
+                case EFFECT_MEMENTO:
+                case EFFECT_GRUDGE:
+                    ADJUST_SCORE(-2);
+                    break;
+                default:
+                    break;
             }
         }
-        else if (AI_DATA->hpPercents[battlerAtk] > 30)
+        else if (AI_DATA->hpPercents[battlerAtk] > 32)
         {
             // med hp
             if (IsStatRaisingEffect(effect) || IsStatLoweringEffect(effect))
@@ -4987,20 +4990,20 @@ static s32 AI_HPAware(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
 
             switch (effect)
             {
-            case EFFECT_EXPLOSION:
-            case EFFECT_BIDE:
-            case EFFECT_CONVERSION:
-            case EFFECT_LIGHT_SCREEN:
-            case EFFECT_MIST:
-            case EFFECT_FOCUS_ENERGY:
-            case EFFECT_CONVERSION_2:
-            case EFFECT_SAFEGUARD:
-            case EFFECT_BELLY_DRUM:
-            case EFFECT_FILLET_AWAY:
-                ADJUST_SCORE(-2);
-                break;
-            default:
-                break;
+                case EFFECT_EXPLOSION:
+                case EFFECT_BIDE:
+                case EFFECT_CONVERSION:
+                case EFFECT_LIGHT_SCREEN:
+                case EFFECT_MIST:
+                case EFFECT_FOCUS_ENERGY:
+                case EFFECT_CONVERSION_2:
+                case EFFECT_SAFEGUARD:
+                case EFFECT_BELLY_DRUM:
+                case EFFECT_FILLET_AWAY:
+                    ADJUST_SCORE(-2);
+                    break;
+                default:
+                    break;
             }
         }
         else
@@ -5012,31 +5015,31 @@ static s32 AI_HPAware(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             // check other discouraged low hp effects
             switch (effect)
             {
-            case EFFECT_BIDE:
-            case EFFECT_CONVERSION:
-            case EFFECT_REFLECT:
-            case EFFECT_LIGHT_SCREEN:
-            case EFFECT_AURORA_VEIL:
-            case EFFECT_MIST:
-            case EFFECT_FOCUS_ENERGY:
-            case EFFECT_RAGE:
-            case EFFECT_CONVERSION_2:
-            case EFFECT_LOCK_ON:
-            case EFFECT_SAFEGUARD:
-            case EFFECT_BELLY_DRUM:
-            case EFFECT_PSYCH_UP:
-            case EFFECT_MIRROR_COAT:
-            case EFFECT_TICKLE:
-            case EFFECT_SUNNY_DAY:
-            case EFFECT_SANDSTORM:
-            case EFFECT_HAIL:
-            case EFFECT_SNOWSCAPE:
-            case EFFECT_RAIN_DANCE:
-            case EFFECT_FILLET_AWAY:
-                ADJUST_SCORE(-2);
-                break;
-            default:
-                break;
+                case EFFECT_BIDE:
+                case EFFECT_CONVERSION:
+                case EFFECT_REFLECT:
+                case EFFECT_LIGHT_SCREEN:
+                case EFFECT_AURORA_VEIL:
+                case EFFECT_MIST:
+                case EFFECT_FOCUS_ENERGY:
+                case EFFECT_RAGE:
+                case EFFECT_CONVERSION_2:
+                case EFFECT_LOCK_ON:
+                case EFFECT_SAFEGUARD:
+                case EFFECT_BELLY_DRUM:
+                case EFFECT_PSYCH_UP:
+                case EFFECT_MIRROR_COAT:
+                case EFFECT_TICKLE:
+                case EFFECT_SUNNY_DAY:
+                case EFFECT_SANDSTORM:
+                case EFFECT_HAIL:
+                case EFFECT_SNOWSCAPE:
+                case EFFECT_RAIN_DANCE:
+                case EFFECT_FILLET_AWAY:
+                    ADJUST_SCORE(-2);
+                    break;
+                default:
+                    break;
             }
         }
     }
@@ -5058,52 +5061,52 @@ static s32 AI_HPAware(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             // med HP - check discouraged effects
             switch (effect)
             {
-            case EFFECT_ATTACK_UP:
-            case EFFECT_ATTACK_UP_USER_ALLY:
-            case EFFECT_DEFENSE_UP:
-            case EFFECT_SPEED_UP:
-            case EFFECT_SPECIAL_ATTACK_UP:
-            case EFFECT_SPECIAL_DEFENSE_UP:
-            case EFFECT_ACCURACY_UP:
-            case EFFECT_EVASION_UP:
-            case EFFECT_ATTACK_DOWN:
-            case EFFECT_DEFENSE_DOWN:
-            case EFFECT_SPEED_DOWN:
-            case EFFECT_SPECIAL_ATTACK_DOWN:
-            case EFFECT_SPECIAL_DEFENSE_DOWN:
-            case EFFECT_ACCURACY_DOWN:
-            case EFFECT_EVASION_DOWN:
-            case EFFECT_MIST:
-            case EFFECT_FOCUS_ENERGY:
-            case EFFECT_ATTACK_UP_2:
-            case EFFECT_DEFENSE_UP_2:
-            case EFFECT_SPEED_UP_2:
-            case EFFECT_SPECIAL_ATTACK_UP_2:
-            case EFFECT_SPECIAL_DEFENSE_UP_2:
-            case EFFECT_ACCURACY_UP_2:
-            case EFFECT_EVASION_UP_2:
-            case EFFECT_ATTACK_DOWN_2:
-            case EFFECT_DEFENSE_DOWN_2:
-            case EFFECT_SPEED_DOWN_2:
-            case EFFECT_SPECIAL_ATTACK_DOWN_2:
-            case EFFECT_SPECIAL_DEFENSE_DOWN_2:
-            case EFFECT_ACCURACY_DOWN_2:
-            case EFFECT_EVASION_DOWN_2:
-            case EFFECT_POISON:
-            case EFFECT_PAIN_SPLIT:
-            case EFFECT_PERISH_SONG:
-            case EFFECT_SAFEGUARD:
-            case EFFECT_TICKLE:
-            case EFFECT_COSMIC_POWER:
-            case EFFECT_BULK_UP:
-            case EFFECT_CALM_MIND:
-            case EFFECT_DRAGON_DANCE:
-            case EFFECT_DEFENSE_UP_3:
-            case EFFECT_SPECIAL_ATTACK_UP_3:
-                ADJUST_SCORE(-2);
-                break;
-            default:
-                break;
+                case EFFECT_ATTACK_UP:
+                case EFFECT_ATTACK_UP_USER_ALLY:
+                case EFFECT_DEFENSE_UP:
+                case EFFECT_SPEED_UP:
+                case EFFECT_SPECIAL_ATTACK_UP:
+                case EFFECT_SPECIAL_DEFENSE_UP:
+                case EFFECT_ACCURACY_UP:
+                case EFFECT_EVASION_UP:
+                case EFFECT_ATTACK_DOWN:
+                case EFFECT_DEFENSE_DOWN:
+                case EFFECT_SPEED_DOWN:
+                case EFFECT_SPECIAL_ATTACK_DOWN:
+                case EFFECT_SPECIAL_DEFENSE_DOWN:
+                case EFFECT_ACCURACY_DOWN:
+                case EFFECT_EVASION_DOWN:
+                case EFFECT_MIST:
+                case EFFECT_FOCUS_ENERGY:
+                case EFFECT_ATTACK_UP_2:
+                case EFFECT_DEFENSE_UP_2:
+                case EFFECT_SPEED_UP_2:
+                case EFFECT_SPECIAL_ATTACK_UP_2:
+                case EFFECT_SPECIAL_DEFENSE_UP_2:
+                case EFFECT_ACCURACY_UP_2:
+                case EFFECT_EVASION_UP_2:
+                case EFFECT_ATTACK_DOWN_2:
+                case EFFECT_DEFENSE_DOWN_2:
+                case EFFECT_SPEED_DOWN_2:
+                case EFFECT_SPECIAL_ATTACK_DOWN_2:
+                case EFFECT_SPECIAL_DEFENSE_DOWN_2:
+                case EFFECT_ACCURACY_DOWN_2:
+                case EFFECT_EVASION_DOWN_2:
+                case EFFECT_POISON:
+                case EFFECT_PAIN_SPLIT:
+                case EFFECT_PERISH_SONG:
+                case EFFECT_SAFEGUARD:
+                case EFFECT_TICKLE:
+                case EFFECT_COSMIC_POWER:
+                case EFFECT_BULK_UP:
+                case EFFECT_CALM_MIND:
+                case EFFECT_DRAGON_DANCE:
+                case EFFECT_DEFENSE_UP_3:
+                case EFFECT_SPECIAL_ATTACK_UP_3:
+                    ADJUST_SCORE(-2);
+                    break;
+                default:
+                    break;
             }
         }
         else
