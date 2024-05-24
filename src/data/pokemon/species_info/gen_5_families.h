@@ -322,7 +322,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         FOOTPRINT(Pignite)
         .levelUpLearnset = sPigniteLevelUpLearnset,
         .teachableLearnset = sPigniteTeachableLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_EMBOAR}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 35, SPECIES_EMBOAR}),
     },
 
     [SPECIES_EMBOAR] =

@@ -3520,7 +3520,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .levelUpLearnset = sGoomyLevelUpLearnset,
         .teachableLearnset = sGoomyTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_SLIGGOO},
-                                {EVO_MOVE, MOVE_SHELTER, SPECIES_SLIGGOO_HISUIAN}),
+                                {EVO_ITEM, ITEM_METAL_COAT, SPECIES_SLIGGOO_HISUIAN}),
     },
 
     [SPECIES_SLIGGOO] =
@@ -4403,7 +4403,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         FOOTPRINT(Bergmite)
         .levelUpLearnset = sBergmiteLevelUpLearnset,
         .teachableLearnset = sBergmiteTeachableLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 31, SPECIES_AVALUGG},
+        .evolutions = EVOLUTION({EVO_LEVEL, 34, SPECIES_AVALUGG},
                                 {EVO_MOVE, MOVE_ANCIENT_POWER, SPECIES_AVALUGG_HISUIAN}),
     },
 

@@ -486,7 +486,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         FOOTPRINT(Brionne)
         .levelUpLearnset = sBrionneLevelUpLearnset,
         .teachableLearnset = sBrionneTeachableLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 34, SPECIES_PRIMARINA}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 35, SPECIES_PRIMARINA}),
     },
 
     [SPECIES_PRIMARINA] =
